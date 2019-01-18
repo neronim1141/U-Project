@@ -14,6 +14,7 @@ public class ModularWorldGenerator : MonoBehaviour
         get {return _instance._mapSettings;}
     }
     public int Iterations = 5;
+    public int seed;
 
 
     void Start()
@@ -26,7 +27,7 @@ public class ModularWorldGenerator : MonoBehaviour
     IEnumerator GenerateMap()
     {
         Random.State oldState = Random.state;
-        Random.InitState(_mapSettings.seed);
+        Random.InitState(seed);
         var startModule = (Module)Instantiate(_mapSettings.StartModule, transform.position, transform.rotation);
         startModule.transform.parent = transform;
         var pendingExits = new List<ModuleConnector>(startModule.GetExits());

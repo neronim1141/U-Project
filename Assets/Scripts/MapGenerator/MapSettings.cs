@@ -6,5 +6,4 @@ public class MapSettings : ScriptableObject {
     public Module CloseModule;
     public Module[] Modules;
     public GameObject[] Connectors;
-    public int seed;
 }
