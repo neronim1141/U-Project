@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapSettings: {fileID: 11400000, guid: 5d2766554d4de664fba5e905aa618057, type: 2}
-  Iterations: 5
+  Iterations: 10
+  seed: 0
 --- !u!4 &467277871
 Transform:
   m_ObjectHideFlags: 0
