@@ -31,7 +31,6 @@ public class ModularWorldGenerator : MonoBehaviour
         var startModule = (Module)Instantiate(_mapSettings.StartModule, transform.position, transform.rotation);
         startModule.transform.parent = transform;
         var pendingExits = new List<ModuleConnector>(startModule.GetExits());
-        yield return new WaitForSeconds(2);
         for (int iteration = 0; iteration < Iterations; iteration++)
         {
             var newExits = new List<ModuleConnector>();
