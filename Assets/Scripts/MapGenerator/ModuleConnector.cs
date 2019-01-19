@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class ModuleConnector : MonoBehaviour
 {
-	public string[] Tags;
 	public bool IsDefault;
-
 	void OnDrawGizmos()
 	{
 		var scale = 1.0f;
