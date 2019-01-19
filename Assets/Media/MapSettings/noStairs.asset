@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85b4a88124fa0240adcc6f828c7ffcd, type: 3}
   m_Name: noStairs
   m_EditorClassIdentifier: 
-  StartModule: {fileID: 5353841777261848782, guid: 2e5eaf6f6e249c74bb0ea9037a7fc23e,
+  StartModule: {fileID: 7384398387508505382, guid: 061f7ef3b6a87744b818df81c9c26952,
     type: 3}
   CloseModule: {fileID: 6626820420168082417, guid: 1147cdf6e62391f4b842d6344025014c,
     type: 3}

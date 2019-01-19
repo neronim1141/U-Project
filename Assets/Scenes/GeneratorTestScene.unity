@@ -142,8 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapSettings: {fileID: 11400000, guid: 9e40101c1a041044fb7811b9b75747a0, type: 2}
-  Iterations: 10
-  seed: 2
+  _propSettings: {fileID: 11400000, guid: 7b72827993e3c6143a62e7a0b84e3fec, type: 2}
+  Iterations: 5
+  seed: 0
 --- !u!4 &467277871
 Transform:
   m_ObjectHideFlags: 0

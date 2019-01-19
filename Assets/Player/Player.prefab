@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7866114105382936837}
   - component: {fileID: 491571792094737433}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 3532352060524026999}
   - component: {fileID: 8105808621676338168}
   - component: {fileID: 381344431092854530}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,9 +75,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2725818506041672112}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 7866114105382936837}
   m_Father: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 2334604104051252994}
   - component: {fileID: 8634252478353972582}
   - component: {fileID: 1212776660870865957}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

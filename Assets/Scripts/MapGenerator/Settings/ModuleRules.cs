@@ -2,7 +2,7 @@ using UnityEngine;
 /// <summary>
 /// Rules for connectivity
 /// </summary>
-[CreateAssetMenu(fileName = "MapRules", menuName = "procedural dungeon/MapRules", order = 0)]
+[CreateAssetMenu(fileName = "MapRules", menuName = "MapGenerator/MapRules", order = 0)]
 [System.Serializable]
 public class ModuleRules : ScriptableObject {
     //Types of Module

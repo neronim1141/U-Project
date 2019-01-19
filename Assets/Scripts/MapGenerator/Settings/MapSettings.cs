@@ -2,7 +2,7 @@ using UnityEngine;
 /// <summary>
 /// Map Setting For Generator
 /// </summary>
-[CreateAssetMenu(fileName = "MapSettings", menuName = "procedural dungeon/MapSettings", order = 0)]
+[CreateAssetMenu(fileName = "MapSettings", menuName = "MapGenerator/MapSettings", order = 0)]
 public class MapSettings : ScriptableObject {
     // StartingModule
     public Module StartModule;

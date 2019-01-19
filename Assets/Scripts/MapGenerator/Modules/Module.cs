@@ -35,6 +35,10 @@ public class Module : MonoBehaviour
         //search and add connectors
         _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());
     }
+    private void Start(){
+        body.SetActive(true);
+        GenerateProps();
+    }
     /// <summary>
     /// Returns end Modules recursively
     /// </summary>
@@ -54,6 +58,21 @@ public class Module : MonoBehaviour
         }
         //if module dosen't have childs add this module // end of recursion
         if(childs.Count==0)Modules.Add(this);
+        return Modules;  
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public List<Module> getChilds(){
+        //create empty list
+        List<Module> Modules = new List<Module>();
+        
+        foreach(Module n in childs){
+            Modules.AddRange(n.getChilds());
+        }
+        //if module dosen't have childs add this module // end of recursion
+        Modules.Add(this);
         return Modules;  
     }
     /// <summary>
@@ -78,6 +97,27 @@ public class Module : MonoBehaviour
             Module.transform.parent=transform;
             Destroy(connector.gameObject);
             Destroy(newConnector.gameObject);
+        }
+    }
+    public void GenerateProps(){
+ 
+        foreach(PropConnector entityConnector in gameObject.GetComponentsInChildren<PropConnector>()){
+            Debug.Log("Create Prop");
+
+                List<Prop> entities= new List<Prop>(ModularWorldGenerator.PropSettings.entities);
+                // filter modules that can connect to this module
+                entities = new List<Prop>(entities.Where(e=>e.connector.type==entityConnector.type));
+                entities.Add(null);
+                Prop entity=Helper.GetRandom(entities.ToArray());
+                if(entity!=null){
+                    entity= (Prop)Instantiate(entity);
+                    entity.transform.parent=body.transform;
+                    MatchExits(entityConnector,entity.connector);
+                    Destroy(entityConnector.gameObject);
+                    Destroy(entity.connector.gameObject);
+                }else{
+                    Destroy(entityConnector.gameObject);
+                }
         }
     }
     /// <summary>
@@ -186,6 +226,19 @@ public class Module : MonoBehaviour
         var forwardVectorToMatch = -oldExit.transform.forward;
         var correctiveRotation = Azimuth(forwardVectorToMatch) - Azimuth(newExit.transform.forward);
         newModule.RotateAround(newExit.transform.position, Vector3.up, correctiveRotation);
+        var correctiveTranslation = oldExit.transform.position - newExit.transform.position;
+        newModule.transform.position += correctiveTranslation;
+
+    }
+    private void MatchExits(PropConnector oldExit, PropConnector newExit)
+    {
+        //get parent of new Exit
+        var newModule = newExit.transform.parent;
+        // dalej sie w magiczy sposob przyrownują wyjścia XD
+        var rightVectorToMatch = oldExit.transform.right;
+        var correctiveRotationRight = Azimuth(rightVectorToMatch) - Azimuth(newExit.transform.right);
+        newModule.RotateAround(newExit.transform.position, Vector3.up, correctiveRotationRight);
+       
         var correctiveTranslation = oldExit.transform.position - newExit.transform.position;
         newModule.transform.position += correctiveTranslation;
 

@@ -14,6 +14,12 @@ public class ModularWorldGenerator : MonoBehaviour
             return _instance._mapSettings;
         }
     }
+    public PropSettings _propSettings;
+    public static PropSettings PropSettings{
+        get{
+            return _instance._propSettings;
+        }
+    }
     public int Iterations;
     public int seed=0;
     private void Awake() {
@@ -22,23 +28,24 @@ public class ModularWorldGenerator : MonoBehaviour
         }
     }
     //root of tree;
-    private Module root;
+    private Module _root;
     // Start is called before the first frame update
     void Start()
     {
-        Generate();
+         _root = (Module)Instantiate(_mapSettings.StartModule);
+        // hook module to generator
+        _root.transform.parent=transform;
+        Generate(_root);
     }
     /// <summary>
     /// Generate new World
     /// </summary>
-    void Generate(){
+    void Generate(Module root){
         //Create RNG
         Random.State oldState=Random.state;
         Random.InitState(seed);
         // Create starting Module
-        root = (Module)Instantiate(_mapSettings.StartModule);
-        // hook module to generator
-        root.transform.parent=transform;
+       
         for(int i=0;i<Iterations;i++)
         {
             // foreach end Module in tree
@@ -51,8 +58,10 @@ public class ModularWorldGenerator : MonoBehaviour
 
             }
         }
-       CleanUp();
-
+       CleanUp(root);
+       foreach(Module n in root.getChilds()){
+           n.GenerateProps();
+       }
        // revert RNG to old state;
        Random.state=oldState;
     }
@@ -61,7 +70,7 @@ public class ModularWorldGenerator : MonoBehaviour
     ///  Clean up after generation
     ///  e.g. Close All Left Connectors
     /// </summary>
-    public void CleanUp(){
+    public void CleanUp(Module root){
             root.Clean();
             foreach (Module n in root.getLeafs())
             {
