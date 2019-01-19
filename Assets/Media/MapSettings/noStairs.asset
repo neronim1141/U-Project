@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c85b4a88124fa0240adcc6f828c7ffcd, type: 3}
-  m_Name: Default
+  m_Name: noStairs
   m_EditorClassIdentifier: 
   StartModule: {fileID: 5353841777261848782, guid: 2e5eaf6f6e249c74bb0ea9037a7fc23e,
     type: 3}
@@ -19,7 +19,6 @@ MonoBehaviour:
   Modules:
   - {fileID: 2435725854684534879, guid: 70cc1fe926f97054ca833df85d212ae3, type: 3}
   - {fileID: 274771259789813332, guid: 05c08c2d874a6db4e93dbe91bc38da09, type: 3}
-  - {fileID: 5300227529936747332, guid: f0a5fd369ab805d47a34eaa15c85d044, type: 3}
   - {fileID: 7098486015791531508, guid: ab537d14a473d8f439e9c1357f329d51, type: 3}
   Connectors:
   - {fileID: 1521766732980176642, guid: 7cefffdc94c2d2a45923a39f64f693c5, type: 3}

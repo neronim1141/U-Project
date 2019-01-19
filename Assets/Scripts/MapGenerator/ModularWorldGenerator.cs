@@ -7,127 +7,50 @@ public class ModularWorldGenerator : MonoBehaviour
 {
 
     private static ModularWorldGenerator _instance;
-    public static System.Action CleanUp;
-    [SerializeField]
-    private MapSettings _mapSettings=null;
+
+    public MapSettings _mapSettings;
     public static MapSettings MapSettings{
-        get {return _instance._mapSettings;}
+        get{
+            return _instance._mapSettings;
+        }
     }
-    public int Iterations = 5;
-    public int seed;
 
-
+    public int Iterations;
+    public int seed=0;
+    private void Awake() {
+        if(ModularWorldGenerator._instance==null){
+            ModularWorldGenerator._instance=this;
+        }
+    }
+    private Module root;
+    // Start is called before the first frame update
     void Start()
     {
-        // create singleton
-        if(ModularWorldGenerator._instance==null)
-            ModularWorldGenerator._instance=this;
-        StartCoroutine(GenerateMap());
+        Generate();
     }
-    IEnumerator GenerateMap()
-    {
-        Random.State oldState = Random.state;
+    void Generate(){
+        Random.State oldState=Random.state;
         Random.InitState(seed);
-        var startModule = (Module)Instantiate(_mapSettings.StartModule, transform.position, transform.rotation);
-        startModule.transform.parent = transform;
-        var pendingExits = new List<ModuleConnector>(startModule.GetExits());
-        for (int iteration = 0; iteration < Iterations; iteration++)
+        root = (Module)Instantiate(_mapSettings.StartModule);
+        root.transform.parent=transform;
+        for(int i=0;i<Iterations;i++)
         {
-            var newExits = new List<ModuleConnector>();
-
-            foreach (var pendingExit in pendingExits)
+            foreach (Module n in root.getLeafs())
             {
-                var newTag = GetRandom(pendingExit.Tags);
-                //TODO: Check if can be placed
-                List<Module> tmpModules = new List<Module>(_mapSettings.Modules);
-                Module newModule = null;
-                ModuleConnector exitToMatch = null;
-                ModuleConnector[] newModuleExits = new ModuleConnector[0];
-                while (newModule == null)
-                {
-                    Module newModulePrefab = GetRandomWithTag(tmpModules, newTag);
-                    tmpModules.Remove(newModulePrefab);
-                    newModule = (Module)Instantiate(newModulePrefab);
-                    newModuleExits = newModule.GetExits();
+                n.GenerateNewModulesOnLeaf();
+                n.transform.parent=transform;
 
-                    exitToMatch = newModuleExits.FirstOrDefault(x => x.IsDefault) ?? GetRandom(newModuleExits);
-                    MatchExits(pendingExit, exitToMatch);
-
-
-                    yield return new WaitForFixedUpdate();
-                    if (!newModule.body.clear)
-                    {
-                        Destroy(newModule.gameObject);
-                        newModule = null;
-                    }
-                }
-                newModule.transform.parent = transform;
-                if (newModule.name != "CloseModule(Clone)")
-                {
-                    var connector = Instantiate(GetRandom(_mapSettings.Connectors), pendingExit.transform.position, pendingExit.transform.rotation);
-                    connector.gameObject.transform.parent = transform;
-                }
-                newExits.AddRange(newModuleExits.Where(e => e != exitToMatch));
-                Destroy(pendingExit);
-                Destroy(exitToMatch);
             }
-
-            pendingExits = newExits;
         }
-        CleanAfter(pendingExits);
-        Random.state = oldState;
-        yield return null;
+       CleanUp();
+       Random.state=oldState;
     }
-    private void CleanAfter(List<ModuleConnector> pendingExits){
-         foreach (var pendingExit in pendingExits)
-        {
-            var newModule = (Module)Instantiate(_mapSettings.CloseModule);
-            var newModuleExits = newModule.GetExits();
-            var exitToMatch = newModuleExits.FirstOrDefault(x => x.IsDefault) ?? GetRandom(newModuleExits);
-            MatchExits(pendingExit, exitToMatch);
-             Destroy(pendingExit);
-            newModule.transform.parent = transform;
-
-        }
-        foreach (Module m in GetComponentsInChildren<Module>())
-        {
-            m.body.removeComponents();
-            m.ActivateObjects();
-        }
-    }
-
-    private void MatchExits(ModuleConnector oldExit, ModuleConnector newExit)
-    {
-        var newModule = newExit.transform.parent;
-        var forwardVectorToMatch = -oldExit.transform.forward;
-        var correctiveRotation = Azimuth(forwardVectorToMatch) - Azimuth(newExit.transform.forward);
-        newModule.RotateAround(newExit.transform.position, Vector3.up, correctiveRotation);
-        var correctiveTranslation = oldExit.transform.position - newExit.transform.position;
-        newModule.transform.position += correctiveTranslation;
-
-    }
-
-
-    private TItem GetRandom<TItem>(TItem[] array)
-    {
-        return array[Random.Range(0, array.Length)];
-    }
-
-
-    private Module GetRandomWithTag(IEnumerable<Module> modules, string tagToMatch)
-    {
-        var matchingModules = modules.Where(m => m.Tags.Contains(tagToMatch)).ToArray();
-        if (matchingModules.Length > 0)
-            return GetRandom(matchingModules);
-        else
-        {
-            return _mapSettings.CloseModule;
-        }
-    }
-
-
-    private float Azimuth(Vector3 vector)
-    {
-        return Vector3.Angle(Vector3.forward, vector) * Mathf.Sign(vector.x);
+    public void CleanUp(){
+            root.Clean();
+            foreach (Module n in root.getLeafs())
+            {
+                n.CleanUp();
+                n.transform.parent=transform;
+            }
     }
 }
