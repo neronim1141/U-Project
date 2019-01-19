@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Move Player
+/// </summary>
 public class Movement : MonoBehaviour {
 	[SerializeField]
 	private float _speed=5;
@@ -23,7 +26,7 @@ public class Movement : MonoBehaviour {
 		Rotate();
 	}
 	private void Move(){
-
+		//smoothing out movement
 		movementInput.x = Mathf.SmoothDamp(movementInput.x, Input.GetAxisRaw("Horizontal"), ref forwardVelocity, movementSmoothing);
 		movementInput.y = Mathf.SmoothDamp(movementInput.y, Input.GetAxisRaw("Vertical"), ref sidewaysVelocity, movementSmoothing);
 		//transform.position += new Vector3(movementInput.x * speed * Time.deltaTime, 0, movementInput.y* speed * Time.deltaTime);

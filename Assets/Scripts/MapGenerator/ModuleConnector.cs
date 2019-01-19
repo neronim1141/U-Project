@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class ModuleConnector : MonoBehaviour
 {
+	/// <summary>
+	/// if exit is Default
+	/// </summary>
 	public bool IsDefault;
 	void OnDrawGizmos()
 	{
+		//Draw Connector lines
 		var scale = 1.0f;
 
 		Gizmos.color = Color.blue;

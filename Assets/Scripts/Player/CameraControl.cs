@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Move Camera
+/// </summary>
 public class CameraControl : MonoBehaviour {
 	public float speedH = 2.0f;
 	public float speedV = 2.0f;
