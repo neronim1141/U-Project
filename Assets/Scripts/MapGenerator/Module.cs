@@ -61,7 +61,7 @@ public class Module : MonoBehaviour
     /// </summary>
     public void CleanUp(){
         //Destroy Collider
-        Destroy(_collider);
+        Clean();
 
         // Close All available Connectors;
         foreach (ModuleConnector connector in _connectors)
@@ -96,6 +96,7 @@ public class Module : MonoBehaviour
     public void Clean(){
                 ModuleCollider collider= gameObject.GetComponent<ModuleCollider>();
                 Destroy(collider); 
+                Destroy(_collider); 
 
     }
 
