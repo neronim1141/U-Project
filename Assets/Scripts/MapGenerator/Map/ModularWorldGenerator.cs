@@ -2,7 +2,8 @@ using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-
+[RequireComponent(typeof(ModuleGenerator))]
+[RequireComponent(typeof(PropGenerator))]
 public class ModularWorldGenerator : MonoBehaviour
 {
     //Singleton
@@ -20,62 +21,27 @@ public class ModularWorldGenerator : MonoBehaviour
             return _instance._propSettings;
         }
     }
-    public int Iterations;
     public int seed=0;
+    public static int Seed{
+        get{
+            return _instance.seed;
+        }
+    }
     private void Awake() {
         if(ModularWorldGenerator._instance==null){
             ModularWorldGenerator._instance=this;
         }
     }
-    //root of tree;
+    public int Iterations;
     private Module _root;
-    // Start is called before the first frame update
-    void Start()
-    {
-         _root = (Module)Instantiate(_mapSettings.StartModule);
+    private void Start(){
+        ModuleGenerator Mgenerator= gameObject.GetComponent<ModuleGenerator>();
+        PropGenerator Pgenerator= gameObject.GetComponent<PropGenerator>();
+        _root = (Module)Instantiate(ModularWorldGenerator.MapSettings.StartModule);
         // hook module to generator
         _root.transform.parent=transform;
-        Generate(_root);
+        Mgenerator.Generate(_root,Iterations,seed);
+        Pgenerator.Generate(_root,seed);
     }
-    /// <summary>
-    /// Generate new World
-    /// </summary>
-    void Generate(Module root){
-        //Create RNG
-        Random.State oldState=Random.state;
-        Random.InitState(seed);
-        // Create starting Module
-       
-        for(int i=0;i<Iterations;i++)
-        {
-            // foreach end Module in tree
-            foreach (Module n in root.getLeafs())
-            {
-                // create new Module
-                n.GenerateNewModulesOnLeaf();
-                // hook module to generator
-                n.transform.parent=transform;
-
-            }
-        }
-       CleanUp(root);
-       foreach(Module n in root.getChilds()){
-           n.GenerateProps();
-       }
-       // revert RNG to old state;
-       Random.state=oldState;
-    }
-
-    /// <summary>
-    ///  Clean up after generation
-    ///  e.g. Close All Left Connectors
-    /// </summary>
-    public void CleanUp(Module root){
-            root.Clean();
-            foreach (Module n in root.getLeafs())
-            {
-                n.CleanUp();
-                n.transform.parent=transform;
-            }
-    }
+    
 }

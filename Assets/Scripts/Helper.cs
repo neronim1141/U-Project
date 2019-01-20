@@ -17,4 +17,8 @@ public static class Helper{
     {
         return array[Random.Range(0, array.Length)];
     }
+    public static float Azimuth(Vector3 vector)
+    {
+        return Vector3.Angle(Vector3.forward, vector) * Mathf.Sign(vector.x);
+    }
 }
