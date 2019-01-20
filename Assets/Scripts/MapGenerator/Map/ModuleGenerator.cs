@@ -40,17 +40,18 @@ public class ModuleGenerator : MonoBehaviour
     private void GenerateChild(ModuleConnector connector, Module parent)
     {
         // copy avaible Modules
-        List<Module> Modules = new List<Module>(ModularWorldGenerator.MapSettings.Modules);
+        List<Weight<Module>> Modules = new List<Weight<Module>>(ModularWorldGenerator.MapSettings.Modules);
         // filter modules that can connect to this module
-        Modules = new List<Module>(Modules.Where(n => n.Rules.connectTo.Contains(parent.Rules.type)));
+        Modules = new List<Weight<Module>>(Modules.Where(n => n.item.Rules.connectTo.Contains(parent.Rules.type)));
         Module child = null;
         // while module doesn't sit
         while (child == null)
         {
             //if has Modules in pool get random module otherwise get close module
-            Module prefab = Modules.Count > 0 ? prefab = Helper.GetRandom(Modules.ToArray()) : ModularWorldGenerator.MapSettings.CloseModule;
+            Weight<Module> module=Helper.GetRandomWithWeights(Modules.ToArray());
+            Modules.Remove(module);
+            Module prefab = Modules.Count > 0 && module!=null ? module.item : ModularWorldGenerator.MapSettings.CloseModule;
             //remove prefab from pull
-            Modules.Remove(prefab);
             child = TryPlaceModule(prefab, connector, parent);
         }
         //activate child body;

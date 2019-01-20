@@ -19,7 +19,6 @@ public class PropGenerator : MonoBehaviour {
     public void GenerateProps(Module m){
  
         foreach(PropConnector entityConnector in m.gameObject.GetComponentsInChildren<PropConnector>()){
-            Debug.Log("Create Prop");
 
                 List<Prop> entities= new List<Prop>(ModularWorldGenerator.PropSettings.entities);
                 // filter modules that can connect to this module

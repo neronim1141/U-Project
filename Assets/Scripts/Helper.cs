@@ -21,4 +21,17 @@ public static class Helper{
     {
         return Vector3.Angle(Vector3.forward, vector) * Mathf.Sign(vector.x);
     }
+
+    public static Weight<TItem> GetRandomWithWeights<TItem>(Weight<TItem>[] array){
+            float pool= array.Sum(i=>i.weight);
+            float randomNum= Random.Range(0,pool);
+            float sum=0;
+            for(int i=0;i<array.Length;i++){
+                sum+=array[i].weight;
+                if(sum>=randomNum){
+                    return array[i];
+                }
+            }
+            return null;
+    }
 }

@@ -9,7 +9,16 @@ public class MapSettings : ScriptableObject {
     //Close Module
     public Module CloseModule;
     // available modules
-    public Module[] Modules;
+    [SerializeField]
+    public WeightModule[] Modules;
     // available connectors
     public GameObject[] Connectors;
 }
+[System.Serializable]
+public class Weight<T>{
+    public T item;
+    [Range(0,1)]
+    public float weight=1;
+}
+[System.Serializable]
+public class WeightModule:Weight<Module>{}
