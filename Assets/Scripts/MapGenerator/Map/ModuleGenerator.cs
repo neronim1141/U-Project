@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -28,6 +29,7 @@ public class ModuleGenerator : MonoBehaviour
             }
         }
         CleanUp(root);
+        //root.RebakeNavMesh();
         // revert RNG to old state;
         Random.state = oldState;
     }
@@ -78,8 +80,8 @@ public class ModuleGenerator : MonoBehaviour
             // that is becouse Destroy wait for update;
             child.Connectors.Remove(childConnector);
 
-            if (!(child is CloseModule))
-                CreateConnector(connector);
+            // if (!(child is CloseModule))
+            //     CreateConnector(connector);
             //removing unnecesarry objects
             Destroy(connector.gameObject);
             Destroy(childConnector.gameObject);
@@ -129,10 +131,10 @@ public class ModuleGenerator : MonoBehaviour
         foreach (Module n in root.getLeafs())
         {
             // Destroy Collider
-            n.Clean();
             // Close All available Connectors;
             foreach (ModuleConnector connector in n.Connectors)
             {
+                 n.Clean();
                 //create new connector
                 Module close = ModularWorldGenerator.MapSettings.CloseModule;
                 Module Module = (Module)Instantiate(close);
@@ -145,7 +147,9 @@ public class ModuleGenerator : MonoBehaviour
                 Module.transform.parent = transform;
                 Destroy(connector.gameObject);
                 Destroy(newConnector.gameObject);
+                
             }
         }
     }
+
 }

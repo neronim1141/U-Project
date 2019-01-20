@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using System.Linq;
 /// <summary>
 /// Generation Module Class
@@ -25,7 +26,9 @@ public class Module : MonoBehaviour
     [SerializeField]
     private GameObject body=null;
     public void ActivateBody(){
+        if(!body.activeSelf)
         body.SetActive(true);
+        
     }
     /// <summary>
     /// Connector list for removing purporses.
@@ -92,8 +95,9 @@ public class Module : MonoBehaviour
                 ModuleCollider collider= gameObject.GetComponent<ModuleCollider>();
                 Destroy(collider); 
                 Destroy(_collider); 
-
+              
     }
+  
 
     /// <summary>
     /// Collision Check

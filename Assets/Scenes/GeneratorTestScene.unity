@@ -143,10 +143,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc06502a7947e84680c1b76867bdd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navMeshLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   _mapSettings: {fileID: 11400000, guid: 9e40101c1a041044fb7811b9b75747a0, type: 2}
   _propSettings: {fileID: 11400000, guid: 7b72827993e3c6143a62e7a0b84e3fec, type: 2}
-  seed: 0
-  Iterations: 5
+  seed: 1
+  Iterations: 20
 --- !u!4 &467277871
 Transform:
   m_ObjectHideFlags: 0
@@ -155,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467277869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.4140625, y: 7.6904297, z: -3.053955}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

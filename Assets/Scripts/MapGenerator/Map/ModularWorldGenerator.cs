@@ -1,5 +1,6 @@
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
 [RequireComponent(typeof(ModuleGenerator))]
@@ -8,6 +9,9 @@ public class ModularWorldGenerator : MonoBehaviour
 {
     //Singleton
     private static ModularWorldGenerator _instance;
+
+    [SerializeField] LayerMask navMeshLayers;
+    NavMeshDataInstance navMeshDataInstance;
 
     public MapSettings _mapSettings;
     public static MapSettings MapSettings{
@@ -42,6 +46,22 @@ public class ModularWorldGenerator : MonoBehaviour
         _root.transform.parent=transform;
         Mgenerator.Generate(_root,Iterations,seed);
         Pgenerator.Generate(_root,seed);
+        BuildNavMesh();
     }
-    
+
+    private void BuildNavMesh(){
+        List<NavMeshBuildSource> buildSources = new List<NavMeshBuildSource>();
+
+        NavMeshBuilder.CollectSources(transform, navMeshLayers, NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), buildSources);
+
+        NavMeshData navData = NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByID(0), buildSources,
+                                new Bounds(Vector3.zero, new Vector3(10000, 10000, 10000)), Vector3.down,
+                                Quaternion.Euler(Vector3.up)
+                                );
+
+        navMeshDataInstance = NavMesh.AddNavMeshData(navData);
+    }
+    private void OnDestroy() {
+        navMeshDataInstance.Remove();
+    }    
 }
