@@ -57,8 +57,9 @@ public class Module : MonoBehaviour
     public Vector3 size= Vector3.one;
 
     public virtual bool Collide(){
+        Matrix4x4 m = Matrix4x4.Rotate(transform.rotation);
         // negative vector because Overlap makes to big box otherwise
-        List<Collider> hitColliders = new List<Collider>(Physics.OverlapBox(transform.position+center,
+        List<Collider> hitColliders = new List<Collider>(Physics.OverlapBox(transform.position+m.MultiplyPoint3x4(center),
          ((transform.localScale+size) / 2)- new Vector3(0.51f,0.51f,0.51f),
           transform.rotation, LayerMask.GetMask("Module")));
           hitColliders.Remove(_collider);
