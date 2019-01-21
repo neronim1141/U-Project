@@ -10,7 +10,6 @@ public class ModularWorldGenerator : MonoBehaviour
     //Singleton
     private static ModularWorldGenerator _instance;
 
-    [SerializeField] LayerMask navMeshLayers;
     NavMeshDataInstance navMeshDataInstance;
 
     public MapSettings _mapSettings;
@@ -52,7 +51,7 @@ public class ModularWorldGenerator : MonoBehaviour
     private void BuildNavMesh(){
         List<NavMeshBuildSource> buildSources = new List<NavMeshBuildSource>();
 
-        NavMeshBuilder.CollectSources(transform, navMeshLayers, NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), buildSources);
+        NavMeshBuilder.CollectSources(transform, LayerMask.GetMask("NavMesh"), NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), buildSources);
 
         NavMeshData navData = NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByID(0), buildSources,
                                 new Bounds(Vector3.zero, new Vector3(10000, 10000, 10000)), Vector3.down,

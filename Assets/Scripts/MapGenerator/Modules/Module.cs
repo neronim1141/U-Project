@@ -17,7 +17,7 @@ public class Module : MonoBehaviour
     /// rules for Module connections
     /// </summary>
     [SerializeField]
-    private ModuleRules rules;
+    private ModuleRules rules=null;
     public ModuleRules Rules{
         get{
            return rules;

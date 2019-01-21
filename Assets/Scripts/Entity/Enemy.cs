@@ -18,9 +18,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         Transform player= GameObject.FindGameObjectWithTag("Player").transform;
-        if(player){
+        if(_navMeshAgent.isOnNavMesh && player!=null )
             _navMeshAgent.SetDestination(player.position);
-        }
         
     }
 }
