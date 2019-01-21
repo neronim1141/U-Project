@@ -6,5 +6,7 @@ using UnityEngine;
 /// </summary>
 public class CloseModule : Module
 {
-
+ public override bool Collide(){
+        return false;
+    }
 }

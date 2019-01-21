@@ -56,7 +56,7 @@ public class Module : MonoBehaviour
     /// </summary>
     public Vector3 size= Vector3.one;
 
-    public bool Collide(){
+    public virtual bool Collide(){
         // negative vector because Overlap makes to big box otherwise
         List<Collider> hitColliders = new List<Collider>(Physics.OverlapBox(transform.position+center,
          ((transform.localScale+size) / 2)- new Vector3(0.51f,0.51f,0.51f),
