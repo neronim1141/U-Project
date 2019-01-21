@@ -43,10 +43,9 @@ public class Module : MonoBehaviour
         }
     }
     #region CollisionCheck
-    [Header("Collision Check")]
-    [SerializeField]
     Collider _collider;
 
+    [Header("Collision Check")]
     /// <summary>
     /// center of checker
     /// </summary>
@@ -66,13 +65,13 @@ public class Module : MonoBehaviour
         return hitColliders.Count>0;
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         //Draw Gizmo of HitCollider
         Gizmos.color = Collide()? Color.red:Color.green;
         //rotate gizmo
         Gizmos.matrix =transform.localToWorldMatrix;
-        Gizmos.DrawWireCube(Vector3.zero+center,size);
+        Gizmos.DrawCube(Vector3.zero+center,size);
     }
     #endregion
 
@@ -124,8 +123,6 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
-                ModuleCollider collider= gameObject.GetComponent<ModuleCollider>();
-                Destroy(collider); 
                 Destroy(_collider); 
               
     }

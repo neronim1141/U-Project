@@ -68,7 +68,6 @@ public class ModuleGenerator : MonoBehaviour
         ModuleConnector childConnector = connectors.FirstOrDefault(x => x.IsDefault) ?? Helper.GetRandom(connectors);
         MatchExits(connector, childConnector);
         //get collider from new module
-        ModuleCollider collider = child.GetComponent<ModuleCollider>();
         //if new module can be placed
         if (!child.Collide())
         {

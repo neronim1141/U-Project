@@ -399,7 +399,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5300227529936747331}
   - component: {fileID: 5300227529936747332}
-  - component: {fileID: 8578430246801154048}
   m_Layer: 9
   m_Name: Stairs
   m_TagString: Untagged
@@ -439,22 +438,8 @@ MonoBehaviour:
   parent: {fileID: 0}
   childs: []
   rules: {fileID: 11400000, guid: 310eb89318418a64698e346f397d8c8a, type: 2}
-  body: {fileID: 0}
-  _collider: {fileID: 5300227529884935753}
   center: {x: 0, y: 0, z: 0}
   size: {x: 10, y: 20, z: 20}
---- !u!114 &8578430246801154048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5300227529936747330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c399f9e1f7eee6643a7cf5b75b1a0401, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5300227529884935796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -516,15 +501,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba763499b177965439eff80f4219e3ae, type: 3}
---- !u!4 &5300227529885334772 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: ba763499b177965439eff80f4219e3ae,
-    type: 3}
-  m_PrefabInstance: {fileID: 5300227529884935796}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5300227529884836052 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: ba763499b177965439eff80f4219e3ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5300227529884935796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5300227529885334772 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: ba763499b177965439eff80f4219e3ae,
     type: 3}
   m_PrefabInstance: {fileID: 5300227529884935796}
   m_PrefabAsset: {fileID: 0}
