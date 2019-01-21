@@ -81,6 +81,7 @@ public class Module : MonoBehaviour
         body.SetActive(false);
         //search and add connectors
         _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());
+        _collider=body.GetComponent<Collider>();
     }
 
     /// <summary>

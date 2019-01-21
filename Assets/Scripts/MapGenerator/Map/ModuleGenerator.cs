@@ -81,8 +81,8 @@ public class ModuleGenerator : MonoBehaviour
             // that is becouse Destroy wait for update;
             child.Connectors.Remove(childConnector);
 
-            // if (!(child is CloseModule))
-            //     CreateConnector(connector);
+            if (!(child is CloseModule))
+                CreateConnector(connector);
             //removing unnecesarry objects
             Destroy(connector.gameObject);
             Destroy(childConnector.gameObject);
