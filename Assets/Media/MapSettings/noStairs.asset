@@ -20,7 +20,7 @@ MonoBehaviour:
   - item: {fileID: 2435725854684534879, guid: 70cc1fe926f97054ca833df85d212ae3, type: 3}
     weight: 1
   - item: {fileID: 274771259789813332, guid: 05c08c2d874a6db4e93dbe91bc38da09, type: 3}
-    weight: 0
+    weight: 1
   - item: {fileID: 1859775329193559182, guid: 429fda6b1c4726b4fa606b8c9c01c616, type: 3}
     weight: 1
   - item: {fileID: 1859775329193559182, guid: 429fda6b1c4726b4fa606b8c9c01c616, type: 3}

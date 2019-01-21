@@ -16,7 +16,7 @@ PrefabInstance:
         type: 3}
       propertyPath: body
       value: 
-      objectReference: {fileID: 1322267226489377409}
+      objectReference: {fileID: 8598460212240761963}
     - target: {fileID: 7098486015791531508, guid: ab537d14a473d8f439e9c1357f329d51,
         type: 3}
       propertyPath: _collider
@@ -80,9 +80,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1737090011560168201, guid: ab537d14a473d8f439e9c1357f329d51, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ab537d14a473d8f439e9c1357f329d51, type: 3}
---- !u!1 &1322267226489377409 stripped
+--- !u!1 &8598460212240761963 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 1630838874696989779, guid: ab537d14a473d8f439e9c1357f329d51,
+  m_CorrespondingSourceObject: {fileID: 8334925238878644921, guid: ab537d14a473d8f439e9c1357f329d51,
     type: 3}
   m_PrefabInstance: {fileID: 358111321721171666}
   m_PrefabAsset: {fileID: 0}
@@ -148,7 +148,7 @@ PrefabInstance:
     - target: {fileID: 6645111467955663221, guid: db5435cf309d0f14485081c3aba38cc2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6645111467955663221, guid: db5435cf309d0f14485081c3aba38cc2,
         type: 3}

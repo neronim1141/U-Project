@@ -8,8 +8,9 @@ using System.Linq;
 /// </summary>
 public class Module : MonoBehaviour
 {
-
+    [HideInInspector]
 	public Module parent=null;
+    [HideInInspector]
     public List<Module> childs =new List<Module>();
 
     /// <summary>
@@ -23,8 +24,7 @@ public class Module : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private GameObject body=null;
+    private GameObject body;
     public void ActivateBody(){
         if(!body.activeSelf)
         body.SetActive(true);
@@ -42,10 +42,41 @@ public class Module : MonoBehaviour
             return _connectors;
         }
     }
+    #region CollisionCheck
+    [Header("Collision Check")]
     [SerializeField]
     Collider _collider;
 
+    /// <summary>
+    /// center of checker
+    /// </summary>
+    public Vector3 center;
+    /// <summary>
+    /// size of checker
+    /// </summary>
+    public Vector3 size= Vector3.one;
+
+    public bool Collide(){
+        // negative vector because Overlap makes to big box otherwise
+        List<Collider> hitColliders = new List<Collider>(Physics.OverlapBox(transform.position+center,
+         ((transform.localScale+size) / 2)- new Vector3(0.51f,0.51f,0.51f),
+          transform.rotation, LayerMask.GetMask("Module")));
+          hitColliders.Remove(_collider);
+        return hitColliders.Count>0;
+    }
+
+    void OnDrawGizmos()
+    {
+        //Draw Gizmo of HitCollider
+        Gizmos.color = Collide()? Color.red:Color.green;
+        //rotate gizmo
+        Gizmos.matrix =transform.localToWorldMatrix;
+        Gizmos.DrawWireCube(Vector3.zero+center,size);
+    }
+    #endregion
+
     private void Awake() {
+        body= transform.Find("Body").gameObject;
         //disable body
         body.SetActive(false);
         //search and add connectors
@@ -99,18 +130,7 @@ public class Module : MonoBehaviour
     }
   
 
-    /// <summary>
-    /// Collision Check
-    /// </summary>
-    /// <returns>
-    /// true if module collide with something,
-    /// false otherwise
-    /// </returns>
-    public bool Collide(){
-         ModuleCollider collider= gameObject.GetComponent<ModuleCollider>();
-         if(!collider) return false;
-         return collider.Collide();
-    }
+
 
     
 
