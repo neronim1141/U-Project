@@ -52,6 +52,7 @@ public class ModuleGenerator : MonoBehaviour
             Modules.Remove(module);
             Module prefab = Modules.Count > 0 && module!=null ? module.item : ModularWorldGenerator.MapSettings.CloseModule;
             //remove prefab from pull
+
             child = TryPlaceModule(prefab, connector, parent);
             if(Modules.Count==0)break;
         }

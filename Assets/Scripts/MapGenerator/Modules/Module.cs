@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using System;
 /// <summary>
 /// Generation Module Class
 /// </summary>
@@ -62,22 +63,24 @@ public class Module : MonoBehaviour
         Matrix4x4 m = Matrix4x4.Rotate(transform.rotation);
         // negative vector because Overlap makes to big box otherwise
         Collider[] hitColliders = Physics.OverlapBox(transform.position+m.MultiplyPoint3x4(center),
-         ((transform.localScale+size) / 2)- new Vector3(0.52f,0.52f,0.52f),
+         ((transform.localScale+size) / 2),
           transform.rotation, LayerMask.GetMask("Module"));
          foreach(Collider hit in hitColliders){
              if(hit==_collider)continue;
-            //   Vector3 otherPosition = hit.gameObject.transform.position;
-            // Quaternion otherRotation = hit.gameObject.transform.rotation;
+              Vector3 otherPosition = hit.gameObject.transform.position;
+            Quaternion otherRotation = hit.gameObject.transform.rotation;
 
-            // Vector3 direction;
-            // float distance;
+            Vector3 direction;
+            float distance;
 
-            // bool overlapped = Physics.ComputePenetration(
-            //     _collider, transform.position, transform.rotation,
-            //     hit, otherPosition, otherRotation,
-            //     out direction, out distance
-            // );
-            // if(overlapped)
+            bool overlapped = Physics.ComputePenetration(
+                _collider, transform.position, transform.rotation,
+                hit, otherPosition, otherRotation,
+                out direction, out distance
+            );
+            decimal dist= Decimal.Parse(distance.ToString(),
+                                  System.Globalization.NumberStyles.Float);
+            if(dist>0.101m)
             return true;
         }
         return false;
@@ -147,7 +150,7 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
-               // Destroy(_collider); 
+                Destroy(_collider); 
               
     }
   
