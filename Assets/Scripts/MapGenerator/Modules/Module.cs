@@ -26,8 +26,8 @@ public class Module : MonoBehaviour
 
     private GameObject body;
     public void ActivateBody(){
-        if(!body.activeSelf)
-        body.SetActive(true);
+       // if(!body.activeSelf)
+        //body.SetActive(true);
         
     }
     /// <summary>
@@ -56,17 +56,36 @@ public class Module : MonoBehaviour
     public Vector3 size= Vector3.one;
 
     public virtual bool Collide(){
+        body.SetActive(false);
+
+        body.SetActive(true);
         Matrix4x4 m = Matrix4x4.Rotate(transform.rotation);
         // negative vector because Overlap makes to big box otherwise
-        List<Collider> hitColliders = new List<Collider>(Physics.OverlapBox(transform.position+m.MultiplyPoint3x4(center),
-         ((transform.localScale+size) / 2)- new Vector3(0.51f,0.51f,0.51f),
-          transform.rotation, LayerMask.GetMask("Module")));
-          hitColliders.Remove(_collider);
-        return hitColliders.Count>0;
+        Collider[] hitColliders = Physics.OverlapBox(transform.position+m.MultiplyPoint3x4(center),
+         ((transform.localScale+size) / 2)- new Vector3(0.52f,0.52f,0.52f),
+          transform.rotation, LayerMask.GetMask("Module"));
+         foreach(Collider hit in hitColliders){
+             if(hit==_collider)continue;
+            //   Vector3 otherPosition = hit.gameObject.transform.position;
+            // Quaternion otherRotation = hit.gameObject.transform.rotation;
+
+            // Vector3 direction;
+            // float distance;
+
+            // bool overlapped = Physics.ComputePenetration(
+            //     _collider, transform.position, transform.rotation,
+            //     hit, otherPosition, otherRotation,
+            //     out direction, out distance
+            // );
+            // if(overlapped)
+            return true;
+        }
+        return false;
     }
 
     private void OnDrawGizmosSelected()
     {
+        if(body==null)Init();
         //Draw Gizmo of HitCollider
         Gizmos.color = Collide()? Color.red:Color.green;
         //rotate gizmo
@@ -76,9 +95,13 @@ public class Module : MonoBehaviour
     #endregion
 
     private void Awake() {
-        body= transform.Find("Body").gameObject;
+        Init();
         //disable body
-        body.SetActive(false);
+       // body.SetActive(false);
+       
+    }
+    private void Init(){
+        body= transform.Find("Body").gameObject;
         //search and add connectors
         _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());
         _collider=body.GetComponent<Collider>();
@@ -124,7 +147,7 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
-                Destroy(_collider); 
+               // Destroy(_collider); 
               
     }
   
