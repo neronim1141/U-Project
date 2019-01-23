@@ -3,19 +3,23 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-public class PropGenerator : MonoBehaviour {
-    public PropSettings _propSettings;
+public class PropGenerator  {
+    private PropSettings _propSettings;
 
-    public void Generate(Module root,int seed){
-        Random.State oldState=Random.state;
-        Random.InitState(seed);
-        foreach (Module m in root.getTreeModules())
-        {
-            GenerateProps(m);
-        }
-       Random.state=oldState;
-
+    public PropGenerator(PropSettings settings){
+        _propSettings=settings;
     }
+
+    // public void Generate(Module root,int seed){
+    //     Random.State oldState=Random.state;
+    //     Random.InitState(seed);
+    //     foreach (Module m in root.getTreeModules())
+    //     {
+    //         GenerateProps(m);
+    //     }
+    //    Random.state=oldState;
+
+    // }
     public  void GenerateProps(Module m){
         foreach(PropConnector entityConnector in m.gameObject.GetComponentsInChildren<PropConnector>()){
 
@@ -25,13 +29,13 @@ public class PropGenerator : MonoBehaviour {
                 entities.Add(null);
                 Prop entity=Helper.GetRandom(entities.ToArray());
                 if(entity!=null){
-                    entity= (Prop)Instantiate(entity);
-                    entity.transform.parent=transform;
+                    entity= (Prop)GameObject.Instantiate(entity);
+                    entity.transform.parent=GameObject.FindGameObjectWithTag("MapGenerator").transform;
                     Helper.MatchConnectors(entityConnector,entity.connector);
-                    Destroy(entityConnector.gameObject);
-                    Destroy(entity.connector.gameObject);
+                    GameObject.Destroy(entityConnector.gameObject);
+                    GameObject.Destroy(entity.connector.gameObject);
                 }else{
-                    Destroy(entityConnector.gameObject);
+                    GameObject.Destroy(entityConnector.gameObject);
                 }
         }
     }

@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85b4a88124fa0240adcc6f828c7ffcd, type: 3}
   m_Name: noStairs
   m_EditorClassIdentifier: 
-  StartModule: {fileID: 6291063632962064957, guid: e92f14fb5c1944d449746b21c134b3ee,
-    type: 3}
   CloseModule: {fileID: 1447071446660646617, guid: 1147cdf6e62391f4b842d6344025014c,
     type: 3}
   Modules:
   - item: {fileID: 1098545154, guid: 70cc1fe926f97054ca833df85d212ae3, type: 3}
     weight: 1
   - item: {fileID: 2172951378372379242, guid: f0a5fd369ab805d47a34eaa15c85d044, type: 3}
-    weight: 1
+    weight: 0
   - item: {fileID: 2328739908923983718, guid: 05c08c2d874a6db4e93dbe91bc38da09, type: 3}
     weight: 1
   - item: {fileID: 1917126801428618600, guid: ab537d14a473d8f439e9c1357f329d51, type: 3}

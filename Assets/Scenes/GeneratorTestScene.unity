@@ -122,11 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 467277871}
   - component: {fileID: 467277870}
-  - component: {fileID: 467277872}
-  - component: {fileID: 467277873}
   m_Layer: 0
   m_Name: MapGenerator
-  m_TagString: Untagged
+  m_TagString: MapGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,6 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartModule: {fileID: 6291063632962064957, guid: e92f14fb5c1944d449746b21c134b3ee,
     type: 3}
+  propSettings: {fileID: 11400000, guid: 7b72827993e3c6143a62e7a0b84e3fec, type: 2}
+  mapSettings: {fileID: 11400000, guid: 9e40101c1a041044fb7811b9b75747a0, type: 2}
   seed: 3
   Iterations: 15
 --- !u!4 &467277871
@@ -161,32 +161,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &467277872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467277869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 857c8d9c2e8213447817f09511d8c075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mapSettings: {fileID: 11400000, guid: 9e40101c1a041044fb7811b9b75747a0, type: 2}
---- !u!114 &467277873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467277869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45be682d55080c345b1aa9cd529f6a47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _propSettings: {fileID: 11400000, guid: 7b72827993e3c6143a62e7a0b84e3fec, type: 2}
 --- !u!1 &727604631
 GameObject:
   m_ObjectHideFlags: 0
