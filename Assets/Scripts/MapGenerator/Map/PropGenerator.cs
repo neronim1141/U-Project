@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 
 public class PropGenerator : MonoBehaviour {
-    
+    public PropSettings _propSettings;
+
     public void Generate(Module root,int seed){
         Random.State oldState=Random.state;
         Random.InitState(seed);
@@ -15,12 +16,13 @@ public class PropGenerator : MonoBehaviour {
        Random.state=oldState;
 
     }
+    
 
     public void GenerateProps(Module m){
  
         foreach(PropConnector entityConnector in m.gameObject.GetComponentsInChildren<PropConnector>()){
 
-                List<Prop> entities= new List<Prop>(ModularWorldGenerator.PropSettings.entities);
+                List<Prop> entities= new List<Prop>(_propSettings.entities);
                 // filter modules that can connect to this module
                 entities = new List<Prop>(entities.Where(e=>e.connector.type==entityConnector.type));
                 entities.Add(null);
@@ -28,7 +30,7 @@ public class PropGenerator : MonoBehaviour {
                 if(entity!=null){
                     entity= (Prop)Instantiate(entity);
                     entity.transform.parent=transform;
-                    MatchExits(entityConnector,entity.connector);
+                    Helper.MatchConnectors(entityConnector,entity.connector);
                     Destroy(entityConnector.gameObject);
                     Destroy(entity.connector.gameObject);
                 }else{
@@ -37,19 +39,7 @@ public class PropGenerator : MonoBehaviour {
         }
     }
 
-     private void MatchExits(PropConnector oldExit, PropConnector newExit)
-    {
-        //get parent of new Exit
-        var newModule = newExit.transform.parent;
-        // dalej sie w magiczy sposob przyrownują wyjścia XD
-        var rightVectorToMatch = oldExit.transform.right;
-        var correctiveRotationRight =  Helper.Azimuth(rightVectorToMatch) - Helper.Azimuth(newExit.transform.right);
-        newModule.RotateAround(newExit.transform.position, Vector3.up, correctiveRotationRight);
-       
-        var correctiveTranslation = oldExit.transform.position - newExit.transform.position;
-        newModule.transform.position += correctiveTranslation;
-
-    }
+    
 
     
 

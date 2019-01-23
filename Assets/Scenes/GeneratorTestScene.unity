@@ -143,10 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc06502a7947e84680c1b76867bdd9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapSettings: {fileID: 11400000, guid: 9e40101c1a041044fb7811b9b75747a0, type: 2}
-  _propSettings: {fileID: 11400000, guid: 7b72827993e3c6143a62e7a0b84e3fec, type: 2}
+  StartModule: {fileID: 6291063632962064957, guid: e92f14fb5c1944d449746b21c134b3ee,
+    type: 3}
   seed: 3
-  Iterations: 3
+  Iterations: 15
 --- !u!4 &467277871
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857c8d9c2e8213447817f09511d8c075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mapSettings: {fileID: 11400000, guid: 9e40101c1a041044fb7811b9b75747a0, type: 2}
 --- !u!114 &467277873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45be682d55080c345b1aa9cd529f6a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _propSettings: {fileID: 11400000, guid: 7b72827993e3c6143a62e7a0b84e3fec, type: 2}
 --- !u!1 &727604631
 GameObject:
   m_ObjectHideFlags: 0

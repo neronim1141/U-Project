@@ -12,18 +12,10 @@ public class ModularWorldGenerator : MonoBehaviour
 
     NavMeshDataInstance navMeshDataInstance;
 
-    public MapSettings _mapSettings;
-    public static MapSettings MapSettings{
-        get{
-            return _instance._mapSettings;
-        }
-    }
-    public PropSettings _propSettings;
-    public static PropSettings PropSettings{
-        get{
-            return _instance._propSettings;
-        }
-    }
+    [SerializeField]
+    Module StartModule;
+    
+    
     public int seed=0;
     public static int Seed{
         get{
@@ -40,7 +32,7 @@ public class ModularWorldGenerator : MonoBehaviour
     private void Start(){
         ModuleGenerator Mgenerator= gameObject.GetComponent<ModuleGenerator>();
         PropGenerator Pgenerator= gameObject.GetComponent<PropGenerator>();
-        _root = (Module)Instantiate(ModularWorldGenerator.MapSettings.StartModule);
+        _root = (Module)Instantiate(StartModule);
         // hook module to generator
         _root.transform.parent=transform;
         Mgenerator.Generate(_root,Iterations,seed);

@@ -7,6 +7,7 @@ using System;
 /// <summary>
 /// Generation Module Class
 /// </summary>
+[RequireComponent(typeof(ColliderDetection))]
 public class Module : MonoBehaviour
 {
     [HideInInspector]
@@ -24,13 +25,7 @@ public class Module : MonoBehaviour
            return rules;
         }
     }
-
-    private GameObject body;
-    public void ActivateBody(){
-       // if(!body.activeSelf)
-        //body.SetActive(true);
-        
-    }
+    
     /// <summary>
     /// Connector list for removing purporses.
     /// because Destroy wait for Update;
@@ -43,72 +38,11 @@ public class Module : MonoBehaviour
             return _connectors;
         }
     }
-    #region CollisionCheck
-    Collider _collider;
-
-    [Header("Collision Check")]
-    /// <summary>
-    /// center of checker
-    /// </summary>
-    public Vector3 center;
-    /// <summary>
-    /// size of checker
-    /// </summary>
-    public Vector3 size= Vector3.one;
-
-    public virtual bool Collide(){
-        body.SetActive(false);
-
-        body.SetActive(true);
-        Matrix4x4 m = Matrix4x4.Rotate(transform.rotation);
-        // negative vector because Overlap makes to big box otherwise
-        Collider[] hitColliders = Physics.OverlapBox(transform.position+m.MultiplyPoint3x4(center),
-         ((transform.localScale+size) / 2),
-          transform.rotation, LayerMask.GetMask("Module"));
-         foreach(Collider hit in hitColliders){
-             if(hit==_collider)continue;
-              Vector3 otherPosition = hit.gameObject.transform.position;
-            Quaternion otherRotation = hit.gameObject.transform.rotation;
-
-            Vector3 direction;
-            float distance;
-
-            bool overlapped = Physics.ComputePenetration(
-                _collider, transform.position, transform.rotation,
-                hit, otherPosition, otherRotation,
-                out direction, out distance
-            );
-            decimal dist= Decimal.Parse(distance.ToString(),
-                                  System.Globalization.NumberStyles.Float);
-            if(dist>0.101m)
-            return true;
-        }
-        return false;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if(body==null)Init();
-        //Draw Gizmo of HitCollider
-        Gizmos.color = Collide()? Color.red:Color.green;
-        //rotate gizmo
-        Gizmos.matrix =transform.localToWorldMatrix;
-        Gizmos.DrawCube(Vector3.zero+center,size);
-    }
-    #endregion
 
     private void Awake() {
-        Init();
-        //disable body
-       // body.SetActive(false);
-       
+        _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());    
     }
-    private void Init(){
-        body= transform.Find("Body").gameObject;
-        //search and add connectors
-        _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());
-        _collider=body.GetComponent<Collider>();
-    }
+
 
     /// <summary>
     /// Returns end Modules recursively
@@ -150,7 +84,7 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
-                Destroy(_collider); 
+                Destroy(gameObject.GetComponent<Collider>()); 
               
     }
   
