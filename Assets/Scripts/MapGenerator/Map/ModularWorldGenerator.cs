@@ -15,7 +15,6 @@ public class ModularWorldGenerator : MonoBehaviour
     [SerializeField]
     Module StartModule;
     
-    
     public int seed=0;
     public static int Seed{
         get{
@@ -32,14 +31,13 @@ public class ModularWorldGenerator : MonoBehaviour
     private void Start(){
         ModuleGenerator Mgenerator= gameObject.GetComponent<ModuleGenerator>();
         PropGenerator Pgenerator= gameObject.GetComponent<PropGenerator>();
-        _root = (Module)Instantiate(StartModule);
+        _root = (Module)Instantiate(StartModule,transform.position,transform.rotation);
         // hook module to generator
         _root.transform.parent=transform;
         Mgenerator.Generate(_root,Iterations,seed);
         Pgenerator.Generate(_root,seed);
         BuildNavMesh();
     }
-
     private void BuildNavMesh(){
         List<NavMeshBuildSource> buildSources = new List<NavMeshBuildSource>();
 

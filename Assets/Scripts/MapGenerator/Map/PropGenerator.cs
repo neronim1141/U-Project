@@ -16,10 +16,7 @@ public class PropGenerator : MonoBehaviour {
        Random.state=oldState;
 
     }
-    
-
-    public void GenerateProps(Module m){
- 
+    public  void GenerateProps(Module m){
         foreach(PropConnector entityConnector in m.gameObject.GetComponentsInChildren<PropConnector>()){
 
                 List<Prop> entities= new List<Prop>(_propSettings.entities);
@@ -38,9 +35,4 @@ public class PropGenerator : MonoBehaviour {
                 }
         }
     }
-
-    
-
-    
-
 }
