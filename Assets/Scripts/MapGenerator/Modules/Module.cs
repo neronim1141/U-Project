@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
+using System;
 /// <summary>
 /// Generation Module Class
 /// </summary>
+[RequireComponent(typeof(ColliderDetection))]
 public class Module : MonoBehaviour
 {
     [HideInInspector]
@@ -23,13 +25,7 @@ public class Module : MonoBehaviour
            return rules;
         }
     }
-
-    private GameObject body;
-    public void ActivateBody(){
-        if(!body.activeSelf)
-        body.SetActive(true);
-        
-    }
+    
     /// <summary>
     /// Connector list for removing purporses.
     /// because Destroy wait for Update;
@@ -42,47 +38,11 @@ public class Module : MonoBehaviour
             return _connectors;
         }
     }
-    #region CollisionCheck
-    Collider _collider;
-
-    [Header("Collision Check")]
-    /// <summary>
-    /// center of checker
-    /// </summary>
-    public Vector3 center;
-    /// <summary>
-    /// size of checker
-    /// </summary>
-    public Vector3 size= Vector3.one;
-
-    public virtual bool Collide(){
-        Matrix4x4 m = Matrix4x4.Rotate(transform.rotation);
-        // negative vector because Overlap makes to big box otherwise
-        List<Collider> hitColliders = new List<Collider>(Physics.OverlapBox(transform.position+m.MultiplyPoint3x4(center),
-         ((transform.localScale+size) / 2)- new Vector3(0.51f,0.51f,0.51f),
-          transform.rotation, LayerMask.GetMask("Module")));
-          hitColliders.Remove(_collider);
-        return hitColliders.Count>0;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        //Draw Gizmo of HitCollider
-        Gizmos.color = Collide()? Color.red:Color.green;
-        //rotate gizmo
-        Gizmos.matrix =transform.localToWorldMatrix;
-        Gizmos.DrawCube(Vector3.zero+center,size);
-    }
-    #endregion
 
     private void Awake() {
-        body= transform.Find("Body").gameObject;
-        //disable body
-        body.SetActive(false);
-        //search and add connectors
-        _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());
-        _collider=body.GetComponent<Collider>();
+        _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());    
     }
+
 
     /// <summary>
     /// Returns end Modules recursively
@@ -124,7 +84,7 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
-                Destroy(_collider); 
+                Destroy(gameObject.GetComponent<Collider>()); 
               
     }
   

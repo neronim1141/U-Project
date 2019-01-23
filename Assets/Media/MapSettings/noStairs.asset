@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85b4a88124fa0240adcc6f828c7ffcd, type: 3}
   m_Name: noStairs
   m_EditorClassIdentifier: 
-  StartModule: {fileID: 7384398387508505382, guid: 061f7ef3b6a87744b818df81c9c26952,
-    type: 3}
-  CloseModule: {fileID: 6626820420168082417, guid: 1147cdf6e62391f4b842d6344025014c,
+  CloseModule: {fileID: 1447071446660646617, guid: 1147cdf6e62391f4b842d6344025014c,
     type: 3}
   Modules:
-  - item: {fileID: 2435725854684534879, guid: 70cc1fe926f97054ca833df85d212ae3, type: 3}
+  - item: {fileID: 1098545154, guid: 70cc1fe926f97054ca833df85d212ae3, type: 3}
     weight: 1
-  - item: {fileID: 274771259789813332, guid: 05c08c2d874a6db4e93dbe91bc38da09, type: 3}
+  - item: {fileID: 2172951378372379242, guid: f0a5fd369ab805d47a34eaa15c85d044, type: 3}
+    weight: 0
+  - item: {fileID: 2328739908923983718, guid: 05c08c2d874a6db4e93dbe91bc38da09, type: 3}
     weight: 1
-  - item: {fileID: 1859775329193559182, guid: 429fda6b1c4726b4fa606b8c9c01c616, type: 3}
+  - item: {fileID: 1917126801428618600, guid: ab537d14a473d8f439e9c1357f329d51, type: 3}
     weight: 1
-  - item: {fileID: 1859775329193559182, guid: 429fda6b1c4726b4fa606b8c9c01c616, type: 3}
+  - item: {fileID: 6890547113290387889, guid: 429fda6b1c4726b4fa606b8c9c01c616, type: 3}
+    weight: 0
+  - item: {fileID: 6855105014842654771, guid: 66ec5386f85c57b4b8f260e0e0ee8f53, type: 3}
     weight: 1
   Connectors:
   - {fileID: 1521766732980176642, guid: 7cefffdc94c2d2a45923a39f64f693c5, type: 3}

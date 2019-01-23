@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class ModuleConnector : MonoBehaviour
+public class ModuleConnector : Connector
 {
 	/// <summary>
 	/// if exit is Default

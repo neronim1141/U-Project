@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using System.Collections;
-[RequireComponent(typeof(ModuleGenerator))]
-[RequireComponent(typeof(PropGenerator))]
 public class ModularWorldGenerator : MonoBehaviour
 {
     //Singleton
@@ -12,18 +10,23 @@ public class ModularWorldGenerator : MonoBehaviour
 
     NavMeshDataInstance navMeshDataInstance;
 
-    public MapSettings _mapSettings;
-    public static MapSettings MapSettings{
-        get{
-            return _instance._mapSettings;
-        }
-    }
-    public PropSettings _propSettings;
+    [SerializeField]
+    Module StartModule;
+    [SerializeField]
+    PropSettings propSettings;
     public static PropSettings PropSettings{
         get{
-            return _instance._propSettings;
+            return _instance.propSettings;
         }
     }
+    [SerializeField]
+    MapSettings mapSettings;
+    public static MapSettings MapSettings{
+        get{
+            return _instance.mapSettings;
+        }
+    }
+    
     public int seed=0;
     public static int Seed{
         get{
@@ -38,16 +41,13 @@ public class ModularWorldGenerator : MonoBehaviour
     public int Iterations;
     private Module _root;
     private void Start(){
-        ModuleGenerator Mgenerator= gameObject.GetComponent<ModuleGenerator>();
-        PropGenerator Pgenerator= gameObject.GetComponent<PropGenerator>();
-        _root = (Module)Instantiate(ModularWorldGenerator.MapSettings.StartModule);
+        ModuleGenerator Mgenerator= new ModuleGenerator(mapSettings);
+        _root = (Module)Instantiate(StartModule,transform.position,transform.rotation);
         // hook module to generator
         _root.transform.parent=transform;
         Mgenerator.Generate(_root,Iterations,seed);
-        Pgenerator.Generate(_root,seed);
         BuildNavMesh();
     }
-
     private void BuildNavMesh(){
         List<NavMeshBuildSource> buildSources = new List<NavMeshBuildSource>();
 

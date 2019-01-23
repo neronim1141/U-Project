@@ -34,4 +34,17 @@ public static class Helper{
             }
             return null;
     }
+    public static void MatchConnectors(Connector oldExit, Connector newExit)
+    {
+        //get parent of new Exit
+        var newModule = newExit.transform.parent;
+        // dalej sie w magiczy sposob przyrownują wyjścia XD
+        var correctiveRotation =  Helper.Azimuth(-oldExit.toMatch) - Helper.Azimuth(newExit.toMatch);
+        newModule.RotateAround(newExit.transform.position, Vector3.up, correctiveRotation);
+       
+        var correctiveTranslation = oldExit.transform.position - newExit.transform.position;
+        newModule.transform.position += correctiveTranslation;
+
+    }
+    
 }

@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PropConnector : MonoBehaviour
+public class PropConnector : Connector
 {
 	public enum Type{Chest}
 	public Type type;
 
+	public override Vector3 toMatch{
+		get{
+			return transform.right;
+		}
+	}
     
     void OnDrawGizmos()
 	{

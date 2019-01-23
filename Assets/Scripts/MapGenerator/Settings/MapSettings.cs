@@ -4,8 +4,6 @@ using UnityEngine;
 /// </summary>
 [CreateAssetMenu(fileName = "MapSettings", menuName = "MapGenerator/MapSettings", order = 0)]
 public class MapSettings : ScriptableObject {
-    // StartingModule
-    public Module StartModule;
     //Close Module
     public Module CloseModule;
     // available modules
