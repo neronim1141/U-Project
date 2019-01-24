@@ -27,5 +27,7 @@ MonoBehaviour:
     weight: 0
   - item: {fileID: 6855105014842654771, guid: 66ec5386f85c57b4b8f260e0e0ee8f53, type: 3}
     weight: 1
+  - item: {fileID: 7287282705333934973, guid: b04be46dbe3d53f49a836c4f4320a6b0, type: 3}
+    weight: 1
   Connectors:
   - {fileID: 1521766732980176642, guid: 7cefffdc94c2d2a45923a39f64f693c5, type: 3}

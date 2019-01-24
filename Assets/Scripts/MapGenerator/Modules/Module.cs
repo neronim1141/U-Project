@@ -40,6 +40,7 @@ public class Module : MonoBehaviour
     }
 
     private void Awake() {
+        transform.Find("Objects").gameObject.SetActive(false);
         _connectors.AddRange(gameObject.GetComponentsInChildren<ModuleConnector>());    
     }
 
@@ -84,6 +85,7 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
+                transform.Find("Objects").gameObject.SetActive(true);
                 Destroy(gameObject.GetComponent<Collider>()); 
               
     }

@@ -46,7 +46,27 @@ public class ModularWorldGenerator : MonoBehaviour
         // hook module to generator
         _root.transform.parent=transform;
         Mgenerator.Generate(_root,Iterations,seed);
+        //CombineMesh();
         BuildNavMesh();
+    }
+    private void CombineMesh(){
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        meshFilters=meshFilters.Where(m=>m.gameObject.layer==9).ToArray();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+        int i = 0;
+
+        while (i < meshFilters.Length)
+        {
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+            Destroy(meshFilters[i]);
+            
+             i++;
+        }
+        transform.GetComponent<MeshFilter>().mesh = new Mesh();
+        transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
+
     }
     private void BuildNavMesh(){
         List<NavMeshBuildSource> buildSources = new List<NavMeshBuildSource>();
