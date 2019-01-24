@@ -96,8 +96,6 @@ MonoBehaviour:
   parent: {fileID: 0}
   childs: []
   rules: {fileID: 0}
-  center: {x: 0, y: 0, z: 0}
-  radius: 0
 --- !u!208 &1447071446660646616
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -170,7 +168,7 @@ GameObject:
   - component: {fileID: 149563418590669291}
   - component: {fileID: 7925408707571008533}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
