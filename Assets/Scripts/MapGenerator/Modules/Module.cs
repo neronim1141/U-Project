@@ -85,8 +85,13 @@ public class Module : MonoBehaviour
     /// remove collision Checker
     /// </summary>
     public void Clean(){
-                transform.Find("Objects").gameObject.SetActive(true);
-                Destroy(gameObject.GetComponent<Collider>()); 
+              transform.Find("Objects").gameObject.SetActive(true);
+              MeshCollider collider=  gameObject.GetComponent<MeshCollider>();
+              if(collider){
+                  collider.convex=false;
+              }else{
+                  Destroy(gameObject.GetComponent<Collider>());
+              }
               
     }
   

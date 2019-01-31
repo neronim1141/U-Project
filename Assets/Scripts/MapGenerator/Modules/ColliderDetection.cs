@@ -43,7 +43,8 @@ public class ColliderDetection : MonoBehaviour {
     {
         Gizmos.color=new Color(1, 1, 1, 0.3f);
         Gizmos.DrawWireSphere(transform.position+center,radius);
-        if(gameObject.GetComponent<MeshCollider>()){
+        var col=gameObject.GetComponent<MeshCollider>();
+        if(col&&col.convex){
             //Draw Gizmo of HitCollider
             Gizmos.color = Collide()? Color.red:Color.green;
             //rotate gizmo

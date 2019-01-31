@@ -91,7 +91,6 @@ public class ModuleGenerator
             GameObject.Destroy(childConnector.gameObject);
             PropGenerator PG = new PropGenerator(ModularWorldGenerator.PropSettings);
             PG.GenerateProps(child);
-            child.Clean();
             return child;
         }
         else
@@ -113,14 +112,12 @@ public class ModuleGenerator
     /// </summary>
     public void CleanUp(Module root)
     {
-        root.Clean();
         foreach (Module n in root.getLeafs())
         {
             // Destroy Collider
             // Close All available Connectors;
             foreach (ModuleConnector connector in n.Connectors)
             {
-                 n.Clean();
                 //create new connector
                 Module close = _mapSettings.CloseModule;
                 Module Module = (Module)GameObject.Instantiate(close);
@@ -134,6 +131,10 @@ public class ModuleGenerator
                 GameObject.Destroy(newConnector.gameObject);
                 
             }
+        }
+        foreach (Module n in root.getTreeModules())
+        {
+            n.Clean();
         }
     }
 
